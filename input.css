@@ -1,0 +1,11 @@
+
+@import "tailwindcss";
+
+.ml2, .letter {
+  display: inline-block;
+  line-height: 1em;
+}
+
+  @theme {
+  --color-main: #00ffa8;
+}

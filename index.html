@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="output.css" />
+  </head>
+  <body>
+    <div
+      class="shadow-lg flex font-bold items-center justify-center min-h-screen flex-col text-grey"
+    >
+      <div
+        class="scale-250 text-shadow-lg bg-[url(./wallpaper.png)] bg-cover bg-center backdrop-blur-2xl flex-col flex items-center justify-center p-4 px-12 rounded-md relative overflow-hidden"
+      >
+        <!-- Overlay -->
+        <div
+          class="absolute inset-0 bg-black opacity-50 z-0"
+          flex-col
+          flex
+          items-center
+          justify-center
+        ></div>
+
+        <!-- Content -->
+        <div
+          class="relative z-10 text-center flex-col flex items-center justify-center"
+        >
+          <div id="name" class="ml2 uppercase text-main text-2xl"></div>
+          <div id="desc" class="ml2 text-white"></div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+
+    <script>
+      fetch("./challenge.json")
+        .then((response) => response.json())
+        .then((data) => {
+          // Set content
+          const nameEl = document.getElementById("name");
+          const descEl = document.getElementById("desc");
+
+          nameEl.textContent = data[0].name;
+          descEl.textContent = data[0].desc;
+
+          // Wrap each letter in a span AFTER content is set
+          nameEl.innerHTML = nameEl.textContent.replace(
+            /\S/g,
+            "<span class='letter'>$&</span>"
+          );
+          descEl.innerHTML = descEl.textContent.replace(
+            /\S/g,
+            "<span class='letter'>$&</span>"
+          );
+
+          // Run animation
+          anime
+            .timeline({ loop: false })
+            .add({
+              targets: ".ml2 .letter",
+              scale: [4, 1],
+              opacity: [0, 1],
+              translateZ: 0,
+              easing: "easeOutExpo",
+              duration: 950,
+              delay: (el, i) => 70 * i + 1000,
+            })
+            .add({
+              targets: ".ml2",
+              duration: 1000,
+              easing: "easeOutExpo",
+              delay: 1000,
+            });
+        })
+        .catch((error) => {
+          console.error("Error loading JSON:", error);
+        });
+    </script>
+  </body>
+</html>
