@@ -1,11 +1,18 @@
 
 @import "tailwindcss";
 
-.ml2, .letter {
+.ml2 .letter {
   display: inline-block;
   line-height: 1em;
+  opacity: 0;
+  letter-spacing: .2rem;
 }
 
   @theme {
   --color-main: #00ffa8;
+}
+
+
+.main {
+
 }
