@@ -41,7 +41,7 @@ Your `challange.json` file should contain an array with objects structured like 
 ```json
 [
   {
-    "name": "Challenge Name",
+    "name": "Challenger Name",
     "desc": "Description of the challenge"
   }
 ]
